@@ -8,7 +8,7 @@ Exercises
 4. Change the snake to respond to mouse clicks.
 """
 
-from random import randrange
+from random import randrange, choice
 from turtle import *
 
 from freegames import square, vector
@@ -17,6 +17,10 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+colors = ['blue', 'green', 'yellow', 'purple', 'orange']
+
+snake_color = choice(colors)
+food_color = choice([c for c in colors if c != snake_color])
 
 def change(x, y):
     """Change snake direction."""
@@ -51,12 +55,10 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
-
-    square(food.x, food.y, 9, 'green')
+        square(body.x, body.y, 9, snake_color)
+    square(food.x, food.y, 9, food_color)
     update()
     ontimer(move, 100)
-
 
 setup(420, 420, 370, 0)
 hideturtle()
